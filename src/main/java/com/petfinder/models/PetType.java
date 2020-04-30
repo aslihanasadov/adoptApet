@@ -1,6 +1,4 @@
 package com.petfinder.models;
-
-
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
-
 @Getter
 @Setter
 @Entity
@@ -26,16 +23,12 @@ public class PetType {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pet_types_generator")
   @Column(name = "id", nullable = false, unique = true)
   private Integer id;
-
   @NotBlank
-  @Column (name="type", nullable = false)
+  @Column (name="type")
   private String type;
-
   @NotBlank
-  @Column (name="description", nullable = false)
- private String description;
-
+  @Column (name="description")
+  private String description;
   @OneToMany(mappedBy = "petType" )
   private List <AdoptablePets> adoptablePets;
 }
-
