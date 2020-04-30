@@ -1,4 +1,5 @@
 package com.petfinder.controllers.api.v1;
+import com.petfinder.dtos.AdoptablePetsDto;
 import com.petfinder.dtos.PetTypeDto;
 import com.petfinder.models.AdoptablePets;
 import com.petfinder.repositories.AdoptablePetsRepository;
@@ -24,8 +25,8 @@ public class PetTypeApiController {
     return service.findAllPetTypes();
   }
   @GetMapping("/{type}")
-  Iterable<AdoptablePets> getByType(@PathVariable String type) {
-    return petsRepository.findAll();
+  Iterable<AdoptablePetsDto> getByType(@PathVariable String type) {
+    return service.findAllByPetType(type);
   }
   @GetMapping("/{animalType}/{id}")
   Iterable<AdoptablePets> getByTypeAndId(@PathVariable String animalType, @PathVariable Integer id) {
