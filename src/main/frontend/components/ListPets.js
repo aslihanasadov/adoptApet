@@ -18,6 +18,7 @@ const ListPets = props => {
           })
             .then(response => response.json())
             .then(data => {
+              console.log(data)
                 setPetType(data)
             })
             .catch(error => {

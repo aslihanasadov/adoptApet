@@ -1,14 +1,8 @@
 package com.petfinder.models;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
@@ -17,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "pet_types")
 @Component
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PetType {
   @Id
   @SequenceGenerator(name = "pet_types_generator", sequenceName = "pet_types_id_seq", allocationSize = 1)
@@ -29,6 +24,7 @@ public class PetType {
   @NotBlank
   @Column (name="description")
   private String description;
-  @OneToMany(mappedBy = "petType" )
+  @OneToMany(mappedBy = "petType", fetch = FetchType.LAZY)
+  @JsonIgnoreProperties("petType")
   private List <AdoptablePets> adoptablePets;
 }

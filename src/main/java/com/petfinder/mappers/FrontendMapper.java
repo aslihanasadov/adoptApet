@@ -9,7 +9,6 @@ import java.util.List;
 @Mapper(injectionStrategy = InjectionStrategy.CONSTRUCTOR, componentModel = "spring")
 public interface FrontendMapper {
   List<PetTypeDto> petTypesToPetTypeDtos(List<PetType> petTypes);
-
   default AdoptablePetsDto adoptablePetToAdoptablePetsDto(AdoptablePets adoptablePets){
     AdoptablePetsDto dto = new AdoptablePetsDto();
     dto.setId(adoptablePets.getId());
@@ -19,9 +18,10 @@ public interface FrontendMapper {
     dto.setVaccination_status(adoptablePets.getVaccination_status());
     dto.setAdoption_story(adoptablePets.getAdoption_story());
     dto.setAdoption_status(adoptablePets.getAdoption_status());
-    dto.setId(adoptablePets.getPetType().getId());
+    dto.setType_id(adoptablePets.getPetType().getId());
+    dto.setType(adoptablePets.getPetType().getType());
+    dto.setDescription(adoptablePets.getPetType().getDescription());
     return dto;
   }
-
   List<AdoptablePetsDto> adoptablePetsToAdoptablePetsDtos(List<AdoptablePets> allByPetType);
 }
