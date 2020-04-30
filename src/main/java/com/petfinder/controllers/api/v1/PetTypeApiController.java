@@ -1,19 +1,27 @@
 package com.petfinder.controllers.api.v1;
+import com.petfinder.dtos.PetTypeDto;
 import com.petfinder.models.AdoptablePets;
 import com.petfinder.repositories.AdoptablePetsRepository;
+import com.petfinder.repositories.PetTypeRepository;
+import com.petfinder.services.FrontendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/pets")
 public class PetTypeApiController {
   private final AdoptablePetsRepository petsRepository;
+  private final PetTypeRepository typeRepository;
+  private final FrontendService service;
   @Autowired
-  public PetTypeApiController(AdoptablePetsRepository petsRepository) {
+  public PetTypeApiController(AdoptablePetsRepository petsRepository,
+      PetTypeRepository typeRepository, FrontendService service) {
     this.petsRepository = petsRepository;
+    this.typeRepository = typeRepository;
+    this.service = service;
   }
   @GetMapping
-  Iterable<AdoptablePets> all() {
-    return petsRepository.findAll();
+  Iterable<PetTypeDto> all() {
+    return service.findAllPetTypes();
   }
   @GetMapping("/{type}")
   Iterable<AdoptablePets> getByType(@PathVariable String type) {
