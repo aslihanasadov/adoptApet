@@ -1,20 +1,12 @@
 package com.petfinder.controllers;
-
-import com.petfinder.repositories.PetTypeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 @Controller
-@RequestMapping("/")
+@RequestMapping
 public class HomeController {
-
-  private PetTypeRepository petTypeRepository;
-
-  @Autowired
-  public HomeController(PetTypeRepository petTypeRepository){
-    this.petTypeRepository = petTypeRepository;
+  @GetMapping("/pets")
+  public String index() {
+    return "index";
   }
-
 }

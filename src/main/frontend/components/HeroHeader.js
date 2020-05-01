@@ -1,10 +1,9 @@
 import React from "react"
-
 const HeroHeader = (props) => {
   return (
       <div className="hero-header">
         <div className="hero-img">
-          <img src="http://localhost:3000/assets/images/hero4.jpg" alt="Hero Image" />
+          <img src="images/hero4.jpg" alt="Hero Image" />
         </div>
         <div className="hero-caption">
           <h2>Find Your New Friend Today!</h2>
@@ -13,5 +12,4 @@ const HeroHeader = (props) => {
       </div>
   )
 }
-
 export default HeroHeader

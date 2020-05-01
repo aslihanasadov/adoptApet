@@ -9,7 +9,6 @@ const PetShowContainer = (props) => {
   const petId = props.match.params.id
   const animalType = props.match.params.animalType
   const addAdoptablePet = (formPayload) => {
-    console.log(JSON.stringify(formPayload))
     fetch('/api/v1/pets/:animalType/:id', {
       method: 'POST',
       body: JSON.stringify(formPayload),
