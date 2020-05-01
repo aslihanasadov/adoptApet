@@ -9,7 +9,7 @@ const PetShowContainer = (props) => {
   const petId = props.match.params.id
   const animalType = props.match.params.animalType
   const addAdoptablePet = (formPayload) => {
-    fetch('/api/v1/pets/:animalType/:id', {
+    fetch(`/api/v1/pets/${animalType}/${petId}`, {
       method: 'POST',
       body: JSON.stringify(formPayload),
       headers: {'Content-Type': 'application/json'}
@@ -39,7 +39,7 @@ const PetShowContainer = (props) => {
         })
         .then(response => response.json())
         .then(body => {
-          setPet(body[0])
+          setPet(body)
         })
         .catch(error => {
           setShouldRedirect(true)

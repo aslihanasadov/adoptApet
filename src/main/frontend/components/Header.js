@@ -10,7 +10,7 @@ const Header = (props) => {
           <div className="row">
             <div className="small-12 columns">
               <div className="top-bar-left">
-                <img src="images/fluffy-logo.png" alt="Fluffy Meets Cuddles Logo"/>
+                <img src="./images/fluffy-logo.png" alt="Fluffy Meets Cuddles Logo"/>
               </div>
               <div className="top-bar-right">
                 <ul className="dropdown menu" data-dropdown-menu>
