@@ -1,4 +1,6 @@
 import React, { useState, Fragment } from "react"
+import ErrorList from "./ErrorList"
+import _ from 'lodash'
 
 const AddAPetForm = props => {
   const defaultForm =  {
@@ -15,6 +17,24 @@ const AddAPetForm = props => {
 
   const [newForm, setNewForm] = useState(defaultForm)
   const [message, setMessage] = useState("")
+  const [errors, setErrors] = useState({})
+
+  const validForSubmission = () => {
+    let submitErrors = {}
+    const requiredFields = ["name", "phone_number", "email","pet_name", "pet_age", "pet_type_id", "pet_image_url", "vaccination_status", "application_status"]
+    requiredFields.forEach((field) => {
+      if(newForm[field].trim() === "" || newForm[field] === null) {
+        submitErrors = {
+          ...submitErrors,
+          [field]: "is blank"
+        }
+      }
+    })
+    setErrors(submitErrors)
+    return _.isEmpty(submitErrors)
+  }
+
+
 
   const handleChange = event => {
     setNewForm({
@@ -45,11 +65,14 @@ const AddAPetForm = props => {
       vaccination_status: isVaccinated,
       application_status: "pending"
     }
-        
-    props.addNewForm(formPayload)
-    props.setShowForm(false)
-    setNewForm(defaultForm)
-    setMessage("Thank you for your form submission. Your surrender request is in process and someone from our team will reach out to you shortly")
+
+    if (validForSubmission()) {
+      props.addNewForm(formPayload)
+      props.setShowForm(false)
+      setNewForm(defaultForm)
+      setMessage(
+          "Thank you for your form submission. Your surrender request is in process and someone from our team will reach out to you shortly")
+    }
   }
 
   let showHideForm
@@ -100,6 +123,7 @@ const AddAPetForm = props => {
       <div className={`add-a-pet-form row ${showHideForm}`}>
         <div className="small-12 columns">
         <form onSubmit={handleSubmit}>
+          <ErrorList errors={errors} />
           <div className="row">
             <div className="small-12 medium-6 columns">
               <label>Name</label>
